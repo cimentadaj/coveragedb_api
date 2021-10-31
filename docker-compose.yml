@@ -12,6 +12,8 @@ services:
       - ./backend/.env
     ports:
       - 8000:8000
+    # entrypoint: /entrypoint.sh
+
   db:
     image: postgres:13-alpine
     volumes:
