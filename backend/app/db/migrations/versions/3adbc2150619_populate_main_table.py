@@ -9,7 +9,6 @@ import os
 # import pandas as pd
 import sqlalchemy as sa
 from alembic import op
-from app.core import config
 
 # revision identifiers, used by Alembic
 revision = '3adbc2150619'
