@@ -130,3 +130,5 @@ dmypy.json
 
 # Data folder
 backend/app/db/data/input*
+input_data/inputDB.csv
+postgres_data/*
