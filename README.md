@@ -26,4 +26,4 @@ POSTGRES_DB=postgres
 
 - Create the folder where PostgreSQL will save the data: `mkdir ./postgres_data`
 
-- Build with `docker-compose up -d --build` and then `docker-compose up`
+- Build with `docker-compose up -d --build` and then `docker-compose up`. For the data to be successfuly imported, wait for the `***** Database migration successful ****`
