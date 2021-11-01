@@ -28,7 +28,7 @@ POSTGRES_DB=postgres
 
 - Create the folder where PostgreSQL will save the data: `mkdir ./postgres_data`
 
-- Build with `docker-compose up -d --build` and then `docker-compose up`. For the data to be successfuly imported, wait for the `***** Database migration successful ****`. It should after the line `coveragedb_api-server-1  | Create Date: 2021-10-30 16:49:10.949972`.
+- Build with `docker-compose up -d --build` and then `docker-compose up`. For the data to be successfuly imported, wait for the `coveragedb_api-server-1  | INFO:     Application startup complete.`. 
 
 - In a separate shell (leave the docker container running), confirm the database has been created with `docker-compose exec db psql -h localhost -U postgres --dbname=postgres -c "select * from coveragedb limit 5;"`. You should see something like this:
 
@@ -42,3 +42,17 @@ POSTGRES_DB=postgres
  Afghanistan | All    | AF01.07.2020  | 01.07.2020 | b   | 30  |     10 | Count  | Cases   |  7592 | AF
 (5 rows)
 ```
+
+
+### Removing the database layer
+
+At some point in the future you'll need to remove the database layer for an external database. Here are the steps to remove the layer successfuly:
+
+* Remove the `db` container from `docker-compose.yml`
+* Remove the `postgres_data` volumes from `docker-compose.yml`
+* Remove `alembic upgrade head` from the execution command in the `server` from `docker-compose.yml`
+* `rm -rf ./backend/app/db/` to remove the entire DB infrastructure
+* `sudo rm -rf input_data/ postgres_data/` to remove the actual input and saved data from PostgreSQL.
+* `rm -rf ./backend/alembic.ini` to remove the migration database setup
+* Update `.env` with the new and valid values for the PostgreSQL connection.
+* Remove `alembic` and other dependencies from `requirements.txt`. Be sure to experiment which dependencies need removal (`databases` is still needed for example).
